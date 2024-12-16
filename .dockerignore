@@ -1,0 +1,14 @@
+# Exclude unnecessary files and folders
+.pytest_cache
+.env*
+.venv
+__pycache__
+*.zip
+client_secrets.json
+mycreds.txt
+
+# Include essential dependency files
+!poetry.toml
+!pyproject.toml
+!.env.example
+!.env

@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  app:
+    # Build configuration
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    # Port mapping
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      # Bind mount the current directory
+      - type: bind
+        source: .
+        target: /app
+        # Mount as read-only for security
+        read_only: true
+    # Linux capabilities management
+    # Drop all default capabilities
+    cap_drop:
+      - ALL
+    # Add only necessary capability
+    cap_add:
+      - NET_BIND_SERVICE
+    # Make root filesystem read-only
+    read_only: true
+    # Temporary file systems for /tmp and /run
+    tmpfs:
+      - /tmp
+      - /run
+    # Prevent gaining new privileges
+    security_opt:
+      - no-new-privileges:true
+    # Restart only on failure, prevent infinite restarts
+    restart: on-failure
+    # Logging configuration
+    logging:
+      # Use JSON file driver
+      driver: "json-file"
+      # Limit log file size and number
+      options:
+        # Maximum log file size
+        max-size: "200k"
+        # Maximum number of log files
+        max-file: "3"

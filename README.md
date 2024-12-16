@@ -183,21 +183,21 @@ This job depends on the `ci` job and runs on `ubuntu-latest`. It performs the
     - Uses the `actions/checkout@v4` action to check out the code from the repository.
 2. **Create .env file**:
     - Creates a .env file and populates it with necessary environment variables.
-2. **Replace placeholders in task definition**:
+3. **Replace placeholders in task definition**:
     - Replace the placeholders in the task definition by substituting `{{AWS_ACCOUNT_ID}}` and `{{AWS_REGION}}` with the corresponding values stored in GitHub Secrets. 
-3. **Validate Task Definition**:
+4. **Validate Task Definition**:
     - Validates the ECS task definition file using `jq`.
-4. **Configure AWS Credentials**:
+5. **Configure AWS Credentials**:
     - Uses the `aws-actions/configure-aws-credentials@v4` action to configure AWS credentials.
-5. **Login to Amazon ECR**:
+6. **Login to Amazon ECR**:
     - Uses the `aws-actions/amazon-ecr-login@v2` action to log in to Amazon ECR.
-6. **Set up Docker Buildx**:
+7. **Set up Docker Buildx**:
     - Uses the `docker/setup-buildx-action@v3` action to set up Docker Buildx.
-7. **Build Docker Image**:
+8. **Build Docker Image**:
     - Uses the `docker/build-push-action@v5` action to build and push the Docker image to Amazon ECR.
-8. **Render Amazon ECS Task Definition**:
+9. **Render Amazon ECS Task Definition**:
     - Uses the `aws-actions/amazon-ecs-render-task-definition@v1` action to render the ECS task definition.
-9. **Deploy to Amazon ECS Service**:
+10. **Deploy to Amazon ECS Service**:
     - Uses the `aws-actions/amazon-ecs-deploy-task-definition@v2` action to deploy the task definition to the ECS service.
 
 ### **Task Definition**

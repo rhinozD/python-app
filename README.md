@@ -159,6 +159,7 @@ The following environment variables are used in the workflow:
 
 The following secrets are used in the workflow:
 - `AWS_ROLE_ARN`: The ARN of the AWS role to assume.
+- `AWS_ACCOUNT_ID`: The AWS account ID.
 
 ### **Jobs**
 #### **CI: Build and Test**
@@ -182,6 +183,8 @@ This job depends on the `ci` job and runs on `ubuntu-latest`. It performs the
     - Uses the `actions/checkout@v4` action to check out the code from the repository.
 2. **Create .env file**:
     - Creates a .env file and populates it with necessary environment variables.
+2. **Replace placeholders in task definition**:
+    - Replace the placeholders in the task definition by substituting `{{AWS_ACCOUNT_ID}}` and `{{AWS_REGION}}` with the corresponding values stored in GitHub Secrets. 
 3. **Validate Task Definition**:
     - Validates the ECS task definition file using `jq`.
 4. **Configure AWS Credentials**:

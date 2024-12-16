@@ -12,6 +12,7 @@ permissions:
 
 env:
   AWS_REGION: ${{ vars.AWS_REGION }}
+  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
   AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
   ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
   ECS_CLUSTER: ${{ vars.ECS_CLUSTER }}
@@ -62,6 +63,11 @@ jobs:
           echo APP_REGION="${{ env.AWS_REGION }}" >> .env
           echo APP_ENV="${{ vars.APP_ENV }}" >> .env
           echo APP_PORT="${{ vars.APP_PORT }}" >> .env
+
+      - name: Replace placeholders in task definition
+      run: |
+        sed -i 's/{{AWS_ACCOUNT_ID}}/${{ secrets.AWS_ACCOUNT_ID }}/g' .aws/task-definition.json
+        sed -i 's/{{AWS_REGION}}/${{ vars.AWS_REGION }}/g' .aws/task-definition.json
 
       - name: Validate Task Definition
         run: cat .aws/task-definition.json | jq .

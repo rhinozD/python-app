@@ -1,6 +1,6 @@
 # Stage 1: Dependencies
 # Use a slim, secure base image for building dependencies
-FROM --platform=linux/amd64 python:3.12.5-slim-bullseye AS builder
+FROM python:3.12.5-slim-bullseye AS builder
 
 # Install minimal system dependencies required for setup
 # --no-install-recommends reduces image size and potential vulnerabilities
@@ -35,7 +35,7 @@ RUN poetry config installer.max-workers 10 \
 
 # Stage 2: Runtime Image
 # Use a clean, slim image for the final runtime
-FROM --platform=linux/amd64 python:3.12.5-slim-bullseye
+FROM python:3.12.5-slim-bullseye
 
 # Install minimal runtime dependencies
 # Clean up package lists

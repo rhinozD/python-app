@@ -35,7 +35,7 @@ RUN poetry config installer.max-workers 10 \
 
 # Stage 2: Runtime Image
 # Use a clean, slim image for the final runtime
-FROM python:3.12.5-slim-bullseye
+FROM python:3.12.5-slim-bullseye AS runner
 
 # Install minimal runtime dependencies
 # Clean up package lists

@@ -151,12 +151,14 @@ The workflow requires the following permissions:
 ### **Environment Variables**
 The following environment variables are used in the workflow:
 - `AWS_REGION`: The AWS region where the resources are located.
-- `AWS_ROLE_ARN`: The ARN of the AWS role to assume.
 - `ECR_REPOSITORY`: The name of the ECR repository.
 - `ECS_CLUSTER`: The name of the ECS cluster.
 - `ECS_SERVICE`: The name of the ECS service.
 - `ECS_TASK_DEFINITION`: The path to the ECS task definition file.
 - `ECS_CONTAINER_NAME`: The name of the ECS container.
+
+The following secrets are used in the workflow:
+- `AWS_ROLE_ARN`: The ARN of the AWS role to assume.
 
 ### **Jobs**
 #### **CI: Build and Test**
